@@ -3,7 +3,6 @@
 #include <string>
 
 enum { SIZE = 100 };
-
 using namespace std;
 
 int main()
@@ -12,7 +11,7 @@ int main()
     
     try
     {
-
+        cout << "1122";
     }
     catch (const std::length_error ex)
     {
