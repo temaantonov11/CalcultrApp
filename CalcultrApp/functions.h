@@ -20,3 +20,20 @@ void scan(string& input) {
 		cin >> c;
 	}
 }
+void string_to_array(string& input, string arr[], int& size) {
+	string x = "";
+	for (int i = 0; input[i] != '\0'; ++i) {
+		if (input[i] == '+' || input[i] == '-' || input[i] == '(' || input[i] == ')' || input[i] == '*' || input[i] == '/' || input[i] == '^') {
+			if (x != "") {
+				arr[size] = x;
+				++size;
+			}
+			arr[size] = input[i];
+			++size;
+			x = "";
+		}
+		else {
+			x += input[i];
+		}
+	}
+}

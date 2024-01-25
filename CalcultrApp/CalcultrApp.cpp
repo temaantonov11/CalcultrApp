@@ -10,11 +10,16 @@ int main()
 {
     string input = "";
     stack st(SIZE);
-    string mod_input[1000];
+    string arr[1000];
+    int size = 0;
+
     scan(input);
     delete_spaces(input);
+    string_to_array(input, arr, size);
 
-    cout << input;
+    for (int i = 0; i < size; ++i) {
+        cout << arr[i] << " ";
+    }
 
 
 
