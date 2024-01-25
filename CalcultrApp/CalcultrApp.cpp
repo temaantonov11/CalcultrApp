@@ -3,17 +3,18 @@
 #include <iostream>
 #include <string>
 
-enum { SIZE = 100 };
+enum { SIZE = 1000 };
 using namespace std;
 
 int main()
 {
     string input = "";
     stack st(SIZE);
+    string mod_input[1000];
     scan(input);
     delete_spaces(input);
-    polish_natation(input, st);
-    cout << st.view_top();
+
+    cout << input;
 
 
 

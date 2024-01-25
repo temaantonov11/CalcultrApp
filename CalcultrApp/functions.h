@@ -20,17 +20,3 @@ void scan(string& input) {
 		cin >> c;
 	}
 }
-void polish_natation(string &input, stack &st) {
-	for (int i = 0; input[i] != '\0'; ++i) {
-		if (input[i] == '(') {
-			st.push(input[i]);
-		}
-		else if (input[i] == ')') {
-			while (st.view_top() != '(') {
-				break;
-				//не дописал
-			}
-		}
-	}
-
-}
