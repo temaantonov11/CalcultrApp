@@ -12,8 +12,8 @@ int main()
     stack st(SIZE);
     scan(input);
     delete_spaces(input);
-
-    cout << input;
+    polish_natation(input, st);
+    cout << st.view_top();
 
 
 
