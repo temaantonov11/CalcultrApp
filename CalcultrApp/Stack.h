@@ -13,7 +13,6 @@ public:
     bool isEmpty()const;
 
 private:
-    enum { SIZE = 100 };
     int top;
     char* arr;
 
