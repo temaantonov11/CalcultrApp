@@ -1,4 +1,5 @@
 ﻿#include "Stack.h"
+#include "functions.h"
 #include <iostream>
 #include <string>
 
@@ -7,16 +8,23 @@ using namespace std;
 
 int main()
 {
+    string input = "";
     stack st(SIZE);
-    
-    try
+    scan(input);
+    delete_spaces(input);
+
+    cout << input;
+
+
+
+    /*try
     {
-        cout << "1122";
+
     }
     catch (const std::length_error ex)
     {
         std::cerr << ex.what() << '\n';
     }
-
+    */
     return 0;
 }

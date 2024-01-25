@@ -20,8 +20,6 @@ void stack::push(char val)
     this->top++;
 }
 
-
-
 char stack::view_top()const
 {
     return this->arr[this->top - 1];
