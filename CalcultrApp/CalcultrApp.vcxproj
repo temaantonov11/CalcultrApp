@@ -128,6 +128,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CalcultrApp.cpp" />
+    <ClCompile Include="doubleStack.cpp" />
+    <ClCompile Include="doubleStack.h" />
     <ClCompile Include="Stack.cpp" />
   </ItemGroup>
   <ItemGroup>
