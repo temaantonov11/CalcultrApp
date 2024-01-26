@@ -1,6 +1,8 @@
 ﻿#include "Stack.h"
+#include "doubleStack.h"
 #include <iostream>
 #include <string>
+
 
 enum { SIZE = 100 };
 
@@ -8,7 +10,14 @@ using namespace std;
 
 int main()
 {
-    stack st(SIZE);
+    doubleStack s1(SIZE);
+    s1.push(2.3);
+    s1.push(4.2);
+    cout << s1.size() << endl;
+    s1.pop();
+    cout << s1.view_top() << endl;
+    s1.pop();
+    cout << s1.size();
     
     try
     {
