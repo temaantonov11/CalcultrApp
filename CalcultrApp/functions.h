@@ -23,7 +23,13 @@ void scan(string& input) {
 void string_to_array(string& input, string arr[], int& size) {
 	string x = "";
 	for (int i = 0; input[i] != '\0'; ++i) {
-		if (input[i] == '+' || input[i] == '-' || input[i] == '(' || input[i] == ')' || input[i] == '*' || input[i] == '/' || input[i] == '^') {
+		if (x == "sin" || x == "cos" || x == "tg" || x == "ctg" || x == "arcsin" || x == "arccos" || x == "arctg" || x == "arcctg") {
+			arr[size] = x;
+			++size;
+			x = "";
+			x += input[i];
+		}
+		else if (input[i] == '+' || input[i] == '-' || input[i] == '(' || input[i] == ')' || input[i] == '*' || input[i] == '/' || input[i] == '^') {
 			if (x != "") {
 				arr[size] = x;
 				++size;
@@ -32,6 +38,7 @@ void string_to_array(string& input, string arr[], int& size) {
 			++size;
 			x = "";
 		}
+		
 		else {
 			x += input[i];
 		}
