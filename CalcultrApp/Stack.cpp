@@ -21,16 +21,6 @@ void stack::push(string val)
     this->top++;
 }
 
-string stack::view_top()const
-{
-    return this->arr[this->top - 1];
-}
-
-int stack::size()const
-{
-    return this->top;
-}
-
 bool stack::isEmpty()const
 {
     if (this->top == 0)
@@ -38,9 +28,10 @@ bool stack::isEmpty()const
     return false;
 }
 
-void stack::pop()
+string stack::pop()
 {
     if (stack::isEmpty())
-        throw std::length_error("Stack is empty");
+        return "@@@";
     this->top--;
+    return this->arr[this->top];
 }
