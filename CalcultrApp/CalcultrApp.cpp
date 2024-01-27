@@ -1,5 +1,6 @@
 ﻿#include "Stack.h"
 #include "doubleStack.h"
+#include "functions.h"
 #include <iostream>
 #include <string>
 
