@@ -40,7 +40,7 @@ float math(string& polish)
 				stack.push(a);
 				number.clear();
 			}
-			if (polish[i] == '-' || polish[i] == '+' || polish[i] == '*' || polish[i] == '/')
+			if (polish[i] == '-' || polish[i] == '+' || polish[i] == '*' || polish[i] == '/' || polish[i] == '^')
 			{
 				if (polish[i] == '-' && stack.size() == 1)
 				{
@@ -69,6 +69,10 @@ float math(string& polish)
 					else if (polish[i] == '/')
 					{
 						stack.push(c / b);
+					}
+					else if (polish[i] == '^')
+					{
+						stack.push(pow(c, b));
 					}
 				}
 				
