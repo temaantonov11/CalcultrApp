@@ -1,19 +1,18 @@
 #pragma once
-
+#include <string>
+using namespace std;
 
 class stack {
 public:
     stack() :top(0), arr(nullptr) {}
     stack(int len);
     ~stack();
-    void push(char val);
-    void pop();
-    char view_top()const;
+    void push(string val);
+    string pop();
     int size()const;
     bool isEmpty()const;
 
 private:
     int top;
-    char* arr;
-
+    string* arr;
 };

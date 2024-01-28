@@ -1,11 +1,12 @@
 #include "Stack.h"
 #include <stdexcept>
 #include <iostream>
-
+#include <string>
+using namespace std;
 stack::stack(int len)
 {
     this->top = 0;
-    this->arr = new char[len];
+    this->arr = new string[len];
 }
 
 stack::~stack()
@@ -14,22 +15,15 @@ stack::~stack()
         delete[] arr;
 }
 
-void stack::push(char val)
+void stack::push(string val)
 {
     this->arr[this->top] = val;
     this->top++;
 }
 
-
-
-char stack::view_top()const
-{
-    return this->arr[this->top - 1];
-}
-
 int stack::size()const
 {
-    return this->top;
+    return top;
 }
 
 bool stack::isEmpty()const
@@ -39,9 +33,10 @@ bool stack::isEmpty()const
     return false;
 }
 
-void stack::pop()
+string stack::pop()
 {
     if (stack::isEmpty())
-        throw std::length_error("Stack is empty");
+        return "@@@";
     this->top--;
+    return this->arr[this->top];
 }

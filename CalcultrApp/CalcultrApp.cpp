@@ -1,16 +1,29 @@
 ﻿#include "Stack.h"
+#include "function.h"
 #include <iostream>
 #include <string>
 
-enum { SIZE = 100 };
-
+enum { SIZE = 1000 };
 using namespace std;
 
 int main()
 {
+    string input = "";
     stack st(SIZE);
-    
-    try
+    string arr[1000];
+    int size = 0;
+
+    scan(input);
+    delete_spaces(input);
+    string_to_array(input, arr, size);
+    input = polish_natation(arr, size, st);
+    stack second_stack(SIZE);
+    double res = Math(input, second_stack);
+    cout << input << endl << res;
+    //cout << endl << polish_natation(arr, size, st);
+
+
+    /*try
     {
 
     }
@@ -18,6 +31,6 @@ int main()
     {
         std::cerr << ex.what() << '\n';
     }
-
+    */
     return 0;
 }
