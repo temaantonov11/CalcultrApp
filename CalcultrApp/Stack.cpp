@@ -21,6 +21,11 @@ void stack::push(string val)
     this->top++;
 }
 
+int stack::size()const
+{
+    return top;
+}
+
 bool stack::isEmpty()const
 {
     if (this->top == 0)

@@ -1,5 +1,5 @@
 ﻿#include "Stack.h"
-#include "functions.h"
+#include "function.h"
 #include <iostream>
 #include <string>
 
@@ -16,12 +16,10 @@ int main()
     scan(input);
     delete_spaces(input);
     string_to_array(input, arr, size);
-
-    for (int i = 0; i < size; ++i) {
-        cout << "[ " << arr[i] << " ] ";
-    }
     input = polish_natation(arr, size, st);
-    cout << endl << input;
+    stack second_stack(SIZE);
+    double res = Math(input, second_stack);
+    cout << input << endl << res;
     //cout << endl << polish_natation(arr, size, st);
 
 

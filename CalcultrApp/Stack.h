@@ -9,6 +9,7 @@ public:
     ~stack();
     void push(string val);
     string pop();
+    int size()const;
     bool isEmpty()const;
 
 private:
