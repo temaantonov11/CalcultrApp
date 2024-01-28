@@ -8,13 +8,10 @@ public:
     stack(int len);
     ~stack();
     void push(string val);
-    void pop();
-    string view_top()const;
-    int size()const;
+    string pop();
     bool isEmpty()const;
 
 private:
     int top;
     string* arr;
-
 };
