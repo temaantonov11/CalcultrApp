@@ -13,16 +13,19 @@ int main()
     string arr[1000];
     int size = 0;
 
+    cout << "Please write an expression or a function:" << endl;
     scan(input);
     delete_spaces(input);
-    if (!check(input)) {
-        string_to_array(input, arr, size);
-        input = polish_natation(arr, size, st);
-        stack second_stack(SIZE);
-        double res = Math(input, second_stack);
-        cout << input << endl << res;
+    while (check(input)) {
+        input = "";
+        scan(input);
+        delete_spaces(input);
     }
-
+    string_to_array(input, arr, size);
+    input = polish_natation(arr, size, st);
+    stack second_stack(SIZE);
+    double res = Math(input, second_stack);
+    cout << "The answer: " << res;
 
     /*try
     {

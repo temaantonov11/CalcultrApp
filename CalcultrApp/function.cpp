@@ -17,19 +17,19 @@ void delete_spaces(string& input) {
 bool check(string& input) {
 	for (int i = 1; input[i] != '\0'; ++i) {
 		if (input[i] == '*' && input[i - 1] == '*') {
-			cout << "The expression is incorrect, write again" << endl;
+			cout << "The expression is incorrect, write again:" << endl;
 			return true;
 		}
 		if (input[i] == '/' && input[i - 1] == '/') {
-			cout << "The expression is incorrect, write again" << endl;
+			cout << "The expression is incorrect, write again:" << endl;
 			return true;
 		}
 		if (input[i] == '*' && input[i - 1] == '/') {
-			cout << "The expression is incorrect, write again" << endl;
+			cout << "The expression is incorrect, write again:" << endl;
 			return true;
 		}
 		if (input[i] == '/' && input[i - 1] == '*') {
-			cout << "The expression is incorrect, write again" << endl;
+			cout << "The expression is incorrect, write again:" << endl;
 			return true;
 		}
 		if (input[i] == '+' && input[i - 1] == '+') {
@@ -202,7 +202,12 @@ int type(string x) {
 		return 6;
 	if (x == "^")
 		return 7;
-	return 0;
+	for (int i = 0; x[i] != '\0'; ++i) {
+		if (x[i] == '0' || x[i] == '1' || x[i] == '2' || x[i] == '3' || x[i] == '4' || x[i] == '5' || x[i] == '6' || x[i] == '7' || x[i] == '8' || x[i] == '9') {
+			return 0;
+		}
+	}
+	return 10;
 }
 
 double BinaryPower(double b, unsigned long long e) {
@@ -306,6 +311,10 @@ double Math(string& polish, stack& p_stack)
 				else if (operatr == "arccos")
 				{
 					p_stack.push(to_string(acos(a)));
+				}
+				else if (operatr == "arctg")
+				{
+					p_stack.push(to_string(atan(a)));
 				}
 				else if (operatr == "ln")
 				{
