@@ -4,7 +4,50 @@
 #include <iostream>
 #include <cmath>
 using namespace std;
-
+void edit_array(string arr[], int& size, int& start) {
+	string new_arr[1000];
+	int point = 0;
+	for (int i = start; i < size; ++i) {
+		new_arr[point] = arr[i];
+		++point;
+	}
+	for (int i = 0; i < point; ++i) {
+		arr[i] = new_arr[i];
+	}
+	size = point;
+}
+int count_variable(string arr[], int& size, string* variable_arr) {
+	int count = 0;
+	for (int i = 0; i < size; ++i) {
+		if (type(arr[i]) == 10) {
+			variable_arr[count] = arr[i];
+			++count;
+		}
+	}
+	return count;
+}
+void set_positions(string arr[], int& size, string* variable_arr, string *variable_value, int& point, int& start) {
+	int count = 0;
+	for (int i = 0; i < size-1; ++i) {
+		if (arr[i] == "=" && type(arr[i+1]) == 0) {
+			variable_value[count] = arr[i + 1];
+			++count;
+			start = i + 2;
+		}
+	}
+}
+void fill_array(string arr[], int& size, string* variable_arr, string* variable_value, int& point) {
+	for (int i = 0; i < size; ++i) {
+		if (type(arr[i]) == 10) {
+			for (int k = 0; k < point; ++k) {
+				if (variable_arr[k] == arr[i]) {
+					arr[i] = variable_value[k];
+					break;
+				}
+			}
+		}
+	}
+}
 void delete_spaces(string& input) {
 	string new_string = "";
 	for (int i = 0; input[i] != '\0'; ++i) {
@@ -16,6 +59,7 @@ void delete_spaces(string& input) {
 }
 bool check(string& input) {
 	for (int i = 1; input[i] != '\0'; ++i) {
+
 		if (input[i] == '*' && input[i - 1] == '*') {
 			cout << "The expression is incorrect, write again:" << endl;
 			return true;
@@ -52,11 +96,10 @@ bool check(string& input) {
 	return false;
 }
 void scan(string& input) {
-	char c;
-	cin >> c;
-	while (c != '=') {
-		input += c;
-		cin >> c;
+	char arr[1000];
+	fgets(arr, 1000, stdin);
+	for (int i = 0; i < 1000; ++i) {
+		input += arr[i];
 	}
 }
 void string_to_array(string& input, string arr[], int& size) {
@@ -67,7 +110,7 @@ void string_to_array(string& input, string arr[], int& size) {
 			++size;
 			x = "";
 		}
-		if (input[i] == '+' || input[i] == '-' || input[i] == '(' || input[i] == ')' || input[i] == '*' || input[i] == '/' || input[i] == '^' || input[i] == '!') {
+		if (input[i] == '+' || input[i] == '-' || input[i] == '(' || input[i] == ')' || input[i] == '*' || input[i] == '/' || input[i] == '^' || input[i] == '!' || input[i] == '=' || input[i] == ',') {
 			if (x != "") {
 				arr[size] = x;
 				++size;
@@ -82,9 +125,10 @@ void string_to_array(string& input, string arr[], int& size) {
 		}
 	}
 	if (x != "") {
-		arr[size] += x;
+		arr[size] = x;
 		++size;
 	}
+
 }
 
 string polish_natation(string* arr, int& size, stack& st) {
@@ -202,6 +246,10 @@ int type(string x) {
 		return 6;
 	if (x == "^")
 		return 7;
+	if (x == ",")
+		return 8;
+	if (x == "=")
+		return 9;
 	for (int i = 0; x[i] != '\0'; ++i) {
 		if (x[i] == '0' || x[i] == '1' || x[i] == '2' || x[i] == '3' || x[i] == '4' || x[i] == '5' || x[i] == '6' || x[i] == '7' || x[i] == '8' || x[i] == '9') {
 			return 0;
