@@ -15,12 +15,13 @@ int main()
 
     scan(input);
     delete_spaces(input);
-    string_to_array(input, arr, size);
-    input = polish_natation(arr, size, st);
-    stack second_stack(SIZE);
-    double res = Math(input, second_stack);
-    cout << input << endl << res;
-    //cout << endl << polish_natation(arr, size, st);
+    if (!check(input)) {
+        string_to_array(input, arr, size);
+        input = polish_natation(arr, size, st);
+        stack second_stack(SIZE);
+        double res = Math(input, second_stack);
+        cout << input << endl << res;
+    }
 
 
     /*try

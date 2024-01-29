@@ -11,4 +11,5 @@ string polish_natation(string* arr, int& size, stack& st);
 int type(string x);
 double BinaryPower(double b, unsigned long long e);
 double Math(string& polish, stack& p_stack);
+bool check(string& input);
 

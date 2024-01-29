@@ -14,6 +14,43 @@ void delete_spaces(string& input) {
 	}
 	input = new_string;
 }
+bool check(string& input) {
+	for (int i = 1; input[i] != '\0'; ++i) {
+		if (input[i] == '*' && input[i - 1] == '*') {
+			cout << "The expression is incorrect, write again" << endl;
+			return true;
+		}
+		if (input[i] == '/' && input[i - 1] == '/') {
+			cout << "The expression is incorrect, write again" << endl;
+			return true;
+		}
+		if (input[i] == '*' && input[i - 1] == '/') {
+			cout << "The expression is incorrect, write again" << endl;
+			return true;
+		}
+		if (input[i] == '/' && input[i - 1] == '*') {
+			cout << "The expression is incorrect, write again" << endl;
+			return true;
+		}
+		if (input[i] == '+' && input[i - 1] == '+') {
+			input[i - 1] = ' ';
+		}
+		if (input[i] == '-' && input[i - 1] == '-') {
+			input[i - 1] = ' ';
+			input[i] = '+';
+		}
+		if (input[i] == '+' && input[i - 1] == '-') {
+			input[i - 1] = ' ';
+			input[i] = '-';
+		}
+		if (input[i] == '-' && input[i - 1] == '+') {
+			input[i - 1] = ' ';
+			input[i] = '-';
+		}
+	}
+	delete_spaces(input);
+	return false;
+}
 void scan(string& input) {
 	char c;
 	cin >> c;
