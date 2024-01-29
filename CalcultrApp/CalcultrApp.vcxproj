@@ -130,10 +130,12 @@
     <ClCompile Include="CalcultrApp.cpp" />
     <ClCompile Include="function.cpp" />
     <ClCompile Include="Stack.cpp" />
+    <ClCompile Include="variable.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="function.h" />
     <ClInclude Include="Stack.h" />
+    <ClInclude Include="variable.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
