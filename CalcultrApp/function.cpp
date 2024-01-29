@@ -4,17 +4,30 @@
 #include <iostream>
 #include <cmath>
 using namespace std;
-void edit_array(string arr[], int& size, int& start) {
+
+void solve_variable(string arr[], int& size, int& start, int& point, double *reso) {
 	string new_arr[1000];
-	int point = 0;
-	for (int i = start; i < size; ++i) {
-		new_arr[point] = arr[i];
-		++point;
+	int j = 0;
+	string save_name = "";
+	for (int i = start+1; arr[i] != "," && i < size; ++i) {
+		if (arr[i] == "=") {
+			save_name = arr[i - 1];
+		}
+		new_arr[j] = arr[i];
+		++j;
+		start = i+1;
 	}
-	for (int i = 0; i < point; ++i) {
-		arr[i] = new_arr[i];
+	stack st(1000);
+	string input = polish_natation(new_arr, j, st);
+	stack second_stack(1000);
+	double res = Math(input, second_stack);
+	for (int i = start + 1; i < size; ++i) {
+		if (arr[i] == save_name) {
+			arr[i] = to_string(res);
+		}
 	}
-	size = point;
+	reso[point] = res;
+	++point;
 }
 int count_variable(string arr[], int& size, string* variable_arr) {
 	int count = 0;
@@ -25,28 +38,6 @@ int count_variable(string arr[], int& size, string* variable_arr) {
 		}
 	}
 	return count;
-}
-void set_positions(string arr[], int& size, string* variable_arr, string *variable_value, int& point, int& start) {
-	int count = 0;
-	for (int i = 0; i < size-1; ++i) {
-		if (arr[i] == "=" && type(arr[i+1]) == 0) {
-			variable_value[count] = arr[i + 1];
-			++count;
-			start = i + 2;
-		}
-	}
-}
-void fill_array(string arr[], int& size, string* variable_arr, string* variable_value, int& point) {
-	for (int i = 0; i < size; ++i) {
-		if (type(arr[i]) == 10) {
-			for (int k = 0; k < point; ++k) {
-				if (variable_arr[k] == arr[i]) {
-					arr[i] = variable_value[k];
-					break;
-				}
-			}
-		}
-	}
 }
 void delete_spaces(string& input) {
 	string new_string = "";
@@ -105,12 +96,25 @@ void scan(string& input) {
 void string_to_array(string& input, string arr[], int& size) {
 	string x = "";
 	for (int i = 0; input[i] != '\0'; ++i) {
+		if (input[i] == '(' && x != "" && type(x) == 10) {
+			while (input[i] != '\0') {
+				x += input[i];
+				if (input[i] == ')') {
+					break;
+				}
+				++i;
+			}
+			++i;
+			arr[size] = x;
+			++size;
+			x = "";
+		}
 		if (x == "sin" || x == "cos" || x == "tg" || x == "ctg" || x == "arcsin" || x == "arccos" || x == "arctg" || x == "arcctg" || x == "log") {
 			arr[size] = x;
 			++size;
 			x = "";
 		}
-		if (input[i] == '+' || input[i] == '-' || input[i] == '(' || input[i] == ')' || input[i] == '*' || input[i] == '/' || input[i] == '^' || input[i] == '!' || input[i] == '=' || input[i] == ',') {
+		if (input[i] == '+' || input[i] == '-' || input[i] == '*' || input[i] == '/' || input[i] == '^' || input[i] == '!' || input[i] == '=' || input[i] == ',' || input[i] == '(' || input[i] == ')') {
 			if (x != "") {
 				arr[size] = x;
 				++size;

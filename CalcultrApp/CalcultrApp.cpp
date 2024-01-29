@@ -12,7 +12,8 @@ int main()
     stack st(SIZE);
     string arr[1000];
     string variable_arr[10];
-    string variable_value[10];
+    double reso[1000];
+    int point1 = 0;
     int point = 0;
     int size = 0;
     int start = 0;
@@ -33,14 +34,10 @@ int main()
         cout << "The answer: " << res;
     }
     else {
-        set_positions(arr, size, variable_arr, variable_value, point, start);
-        fill_array(arr, size, variable_arr, variable_value, point);
-        edit_array(arr, size, start);
-        input = polish_natation(arr, size, st);
-        stack second_stack(SIZE);
-        double res = Math(input, second_stack);
-        cout << "The answer: " << res;
-
+        while (start < size) {
+            solve_variable(arr, size, start, point1, reso);
+        }
+        cout << "Answer: " << reso[point1 - 1];
     }
     /*try
     {
