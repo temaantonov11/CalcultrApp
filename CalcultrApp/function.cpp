@@ -54,6 +54,20 @@ string polish_natation(string* arr, int& size, stack& st) {
 	string ans = "";
 	for (int i = 0; i < size; ++i) {
 		if (type(arr[i]) == 7) {
+			string y = st.pop();
+			while (true) {
+				if (y == "@@@") {
+					break;
+				}
+				if (y == "^") {
+					ans += "^ ";
+				}
+				if (y != "^") {
+					st.push(y);
+					break;
+				}
+				y = st.pop();
+			}
 			st.push(arr[i]);
 		}
 		else if (type(arr[i]) == 6) {
@@ -143,7 +157,7 @@ int type(string x) {
 		return 2;
 	if (x == ")")
 		return 3;
-	if (x == "sin" || x == "cos" || x == "tg" || x == "ctg" || x == "arcsin" || x == "arccos" || x == "arctg" || x == "arcctg" || x == "ln")
+	if (x == "sin" || x == "cos" || x == "tg" || x == "ctg" || x == "arcsin" || x == "arccos" || x == "arctg" || x == "arcctg" || x == "ln" || x == "sqrt")
 		return 4;
 	if (x == "/" || x == "*")
 		return 5;
@@ -259,6 +273,10 @@ double Math(string& polish, stack& p_stack)
 				else if (operatr == "ln")
 				{
 					p_stack.push(to_string(log(a)));
+				}
+				else if (operatr == "sqrt")
+				{
+					p_stack.push(to_string(sqrt(a)));
 				}
 			}
 			operatr.clear();
