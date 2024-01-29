@@ -53,7 +53,10 @@ void string_to_array(string& input, string arr[], int& size) {
 string polish_natation(string* arr, int& size, stack& st) {
 	string ans = "";
 	for (int i = 0; i < size; ++i) {
-		if (type(arr[i]) == 6) {
+		if (type(arr[i]) == 7) {
+			st.push(arr[i]);
+		}
+		else if (type(arr[i]) == 6) {
 			ans += arr[i] + " ";
 		}
 		else if (type(arr[i]) == 4) {
@@ -144,15 +147,30 @@ int type(string x) {
 		return 4;
 	if (x == "/" || x == "*")
 		return 5;
-	if (x == "!" || x == "^")
+	if (x == "!")
 		return 6;
+	if (x == "^")
+		return 7;
 	return 0;
+}
+
+double BinaryPower(double b, unsigned long long e) {
+	double v = 1.0;
+	while (e != 0) {
+		if ((e & 1) != 0) {
+			v *= b;
+		}
+		b *= b;
+		e >>= 1;
+	}
+	return v;
 }
 
 double Math(string& polish, stack& p_stack)
 {
 	string number;
 	string operatr;
+	double firstOperand, secondOperand;
 	for (int i = 0; i < polish.size(); ++i)
 	{
 		if (polish[i] >= '0' && polish[i] <= '9' || polish[i] == '.')
@@ -161,15 +179,27 @@ double Math(string& polish, stack& p_stack)
 		}
 		else if (polish[i] == '+' || polish[i] == '-' || polish[i] == '/' || polish[i] == '*' || polish[i] == '^')
 		{
+			if (number.size() > 0)
+			{
+				p_stack.push(number);
+				number.clear();
+			}
+			
 			if (p_stack.size() == 1 && polish[i] == '-')
 			{
 				double b = stod(p_stack.pop());
 				p_stack.push(to_string(b * (-1)));
 				continue;
 			}
-			
-			double firstOperand = stod(p_stack.pop());
-			double secondOperand = stod(p_stack.pop());
+			if (p_stack.size() >= 2)
+			{
+				firstOperand = stod(p_stack.pop());
+				secondOperand = stod(p_stack.pop());
+			}
+			else
+			{
+				break;
+			}
 			if (polish[i] == '+')
 			{
 				p_stack.push(to_string(firstOperand + secondOperand));
