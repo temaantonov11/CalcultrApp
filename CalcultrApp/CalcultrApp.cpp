@@ -1,13 +1,16 @@
 ﻿#include "Stack.h"
 #include "function.h"
+#include "BigInt.h"
 #include <iostream>
 #include <string>
+#include <vector>
 
 enum { SIZE = 1000 };
 using namespace std;
 
 int main()
 {
+    /*
     string input = "";
     stack st(SIZE);
     string arr[1000];
@@ -31,7 +34,8 @@ int main()
         input = polish_natation(arr, size, st);
         stack second_stack(SIZE);
         double res = Math(input, second_stack);
-        cout << "The answer: " << res;
+        cout << "The answer: " << res << endl;
+        cout << input;
     }
     else {
         while (start < size) {
@@ -39,6 +43,16 @@ int main()
         }
         cout << "Answer: " << reso[point1 - 1];
     }
+
+    */
+    string s = "-12000000";
+    string g = "-10000";
+    BigInt a(s);
+    BigInt b(g);
+    BigInt c = a.operator+(b);
+    c.write();
+    cout << '\n';
+    cout << a.operator=(b);
     /*try
     {
 
