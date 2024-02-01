@@ -5,17 +5,17 @@
 #include <cmath>
 using namespace std;
 
-void solve_variable(string arr[], int& size, int& start, int& point, double *reso) {
+void solve_variable(string arr[], int& size, int& start, int& point, double* reso) {
 	string new_arr[1000];
 	int j = 0;
 	string save_name = "";
-	for (int i = start+1; arr[i] != "," && i < size; ++i) {
+	for (int i = start + 1; arr[i] != "," && i < size; ++i) {
 		if (arr[i] == "=") {
 			save_name = arr[i - 1];
 		}
 		new_arr[j] = arr[i];
 		++j;
-		start = i+1;
+		start = i + 1;
 	}
 	stack st(1000);
 	string input = polish_natation(new_arr, j, st);
@@ -49,6 +49,9 @@ void delete_spaces(string& input) {
 	input = new_string;
 }
 bool check(string& input) {
+	if (input[0] == '-') {
+		input[0] = '~';
+	}
 	for (int i = 1; input[i] != '\0'; ++i) {
 
 		if (input[i] == '*' && input[i - 1] == '*') {
@@ -82,6 +85,15 @@ bool check(string& input) {
 			input[i - 1] = ' ';
 			input[i] = '-';
 		}
+		if (input[i - 1] == '*' && input[i] == '-') {
+			input[i] = '~';
+		}
+		if (input[i - 1] == '/' && input[i] == '-') {
+			input[i] = '~';
+		}
+		if (input[i - 1] == '^' && input[i] == '-') {
+			input[i] = '~';
+		}
 	}
 	delete_spaces(input);
 	return false;
@@ -114,7 +126,7 @@ void string_to_array(string& input, string arr[], int& size) {
 			++size;
 			x = "";
 		}
-		if (input[i] == '+' || input[i] == '-' || input[i] == '*' || input[i] == '/' || input[i] == '^' || input[i] == '!' || input[i] == '=' || input[i] == ',' || input[i] == '(' || input[i] == ')') {
+		if (input[i] == '+' || input[i] == '-' || input[i] == '*' || input[i] == '/' || input[i] == '^' || input[i] == '!' || input[i] == '=' || input[i] == ',' || input[i] == '(' || input[i] == ')' || input[i] == '~') {
 			if (x != "") {
 				arr[size] = x;
 				++size;
@@ -242,7 +254,7 @@ int type(string x) {
 		return 2;
 	if (x == ")")
 		return 3;
-	if (x == "sin" || x == "cos" || x == "tg" || x == "ctg" || x == "arcsin" || x == "arccos" || x == "arctg" || x == "arcctg" || x == "ln" || x == "sqrt")
+	if (x == "sin" || x == "cos" || x == "tg" || x == "ctg" || x == "arcsin" || x == "arccos" || x == "arctg" || x == "arcctg" || x == "ln" || x == "sqrt" || x == "~")
 		return 4;
 	if (x == "/" || x == "*")
 		return 5;
@@ -340,7 +352,10 @@ double Math(string& polish, stack& p_stack)
 			else if (operatr.size() > 0)
 			{
 				double a = stod(p_stack.pop());
-				if (operatr == "sin")
+				if (operatr == "~") {
+					p_stack.push(to_string(-a));
+				}
+				else if (operatr == "sin")
 				{
 					p_stack.push(to_string(sin(a)));
 				}

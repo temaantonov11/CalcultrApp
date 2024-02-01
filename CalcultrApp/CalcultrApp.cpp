@@ -27,6 +27,8 @@ int main()
         delete_spaces(input);
     }
     string_to_array(input, arr, size);
+    for (int i = 0; i < size; ++i)
+        cout << "[ " << arr[i] << " ] ";
     if ((point = count_variable(arr, size, variable_arr)) == 0) {
         input = polish_natation(arr, size, st);
         stack second_stack(SIZE);
@@ -36,12 +38,12 @@ int main()
     else {
         while (start < size) {
             solve_variable(arr, size, start, point1, reso);
+
         }
         cout << "Answer: " << reso[point1 - 1];
     }
     /*try
     {
-
     }
     catch (const std::length_error ex)
     {
