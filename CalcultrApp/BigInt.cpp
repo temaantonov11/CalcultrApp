@@ -279,3 +279,67 @@ BigInt BigInt::operator*(BigInt& a)
 	}
 	return c;
 }
+
+bool BigInt:: operator<=(BigInt& a)
+{
+	if (this->number.size() > a.number.size())
+	{
+		return false;
+	}
+	else if (this->number.size() < a.number.size())
+	{
+		return true;
+	}
+	else
+	{
+		for (int i = this->number.size() - 1; i >= 0; --i)
+		{
+			if (this->number[i] > a.number[i])
+				return false;
+			else if (this->number[i] < a.number[i])
+				return true;
+		}
+	}
+	return true;
+}
+
+BigInt BigInt:: operator/(BigInt& a)
+{
+	vector <int> res(this->number.size() - a.number.size() + 1, 0);
+	BigInt c(res);
+	for (int i = res.size() - 1; i >= 0; --i)
+	{
+		while (a.operator*(c).operator<=(*this))
+		{
+			c.number[i]++;
+		}
+		c.number[i]--;
+	}
+	while (c.number.size() > 1 && !c.number.back())
+	{
+		c.number.pop_back();
+	}
+	if ((this->sign == 1 && a.sign == 0) || (this->sign == 0 && a.sign == 1))
+	{
+		c.setSign(1);
+	}
+	else
+	{
+		c.setSign(0);
+	}
+	return c;
+}
+
+string BigInt::to_str()
+{
+	string out;
+	if (this->sign == 1)
+	{
+		out.push_back('-');
+	}
+	for (int i = this->number.size() - 1; i >= 0; --i)
+	{
+		out.push_back(this->number[i]+'0');
+	}
+	return out;
+}
