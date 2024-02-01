@@ -45,14 +45,13 @@ int main()
     }
 
     */
-    string s = "-12000000";
-    string g = "-10000";
+    string s = "-1254324242424226";
+    string g = "-354";
     BigInt a(s);
     BigInt b(g);
-    BigInt c = a.operator+(b);
+    BigInt c = a.operator*(b);
     c.write();
     cout << '\n';
-    cout << a.operator=(b);
     /*try
     {
 

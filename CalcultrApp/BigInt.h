@@ -23,6 +23,7 @@ public:
 	void setSign(int sign);
 	BigInt operator + (BigInt& a);
 	BigInt operator - (BigInt& a);
+	BigInt operator * (BigInt& a);
 private:
 	vector<int> number;
 	int sign;

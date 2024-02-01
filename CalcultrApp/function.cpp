@@ -5,6 +5,8 @@
 #include <cmath>
 using namespace std;
 
+#define M_PI 3.14159265358979323846
+
 void solve_variable(string arr[], int& size, int& start, int& point, double *reso) {
 	string new_arr[1000];
 	int j = 0;
@@ -342,31 +344,31 @@ double Math(string& polish, stack& p_stack)
 				double a = stod(p_stack.pop());
 				if (operatr == "sin")
 				{
-					p_stack.push(to_string(sin(a)));
+					p_stack.push(to_string(sin(a * M_PI / 180)));
 				}
 				else if (operatr == "cos")
 				{
-					p_stack.push(to_string(cos(a)));
+					p_stack.push(to_string(cos(a*M_PI/180)));
 				}
 				else if (operatr == "tg")
 				{
-					p_stack.push(to_string(tan(a)));
+					p_stack.push(to_string(tan(a * M_PI / 180)));
 				}
 				else if (operatr == "ctg")
 				{
-					p_stack.push(to_string(cos(a) / sin(a)));
+					p_stack.push(to_string(cos(a * M_PI / 180) / sin(a * M_PI / 180)));
 				}
 				else if (operatr == "arcsin")
 				{
-					p_stack.push(to_string(asin(a)));
+					p_stack.push(to_string(asin(a * M_PI / 180)));
 				}
 				else if (operatr == "arccos")
 				{
-					p_stack.push(to_string(acos(a)));
+					p_stack.push(to_string(acos(a * M_PI / 180)));
 				}
 				else if (operatr == "arctg")
 				{
-					p_stack.push(to_string(atan(a)));
+					p_stack.push(to_string(atan(a * M_PI / 180)));
 				}
 				else if (operatr == "ln")
 				{

@@ -74,6 +74,10 @@ BigInt BigInt::pluss(BigInt& a)
 	{
 		res.push_back(carry);
 	}
+	while (res.size() > 1 && !res.back())
+	{
+		res.pop_back();
+	}
 	BigInt c(res);
 	return c;
 }
@@ -109,6 +113,10 @@ BigInt BigInt::minuss(BigInt& a)
 			car = 0;
 		}
 		
+	}
+	while (res.size() > 1 && !res.back())
+	{
+		res.pop_back();
 	}
 	BigInt c(res);
 	return c;
@@ -201,5 +209,73 @@ BigInt BigInt::operator+(BigInt& a)
 
 BigInt BigInt::operator-(BigInt& a)
 {
-	
+	if (this->sign == 0 && a.sign == 0)
+	{
+		if (this->operator>(a) || this->operator=(a))
+		{
+			BigInt c = this->minuss(a);
+			return c;
+		}
+		else
+		{
+			BigInt c = a.minuss(*this);
+			c.sign = 1;
+			return c;
+		}
+	}
+	else if (this->sign == 0 && a.sign == 1)
+	{
+		a.setSign(0);
+		BigInt c = this->operator+(a);
+		return c;
+	}
+	else if (this->sign == 1 && a.sign == 0)
+	{
+		this->setSign(0);
+		BigInt c = this->operator+(a);
+		c.sign = 1;
+		return c;
+	}
+	else 
+	{
+		a.setSign(0);
+		BigInt c = this->operator+(a);
+		return c;
+	}
+}
+
+BigInt BigInt::operator*(BigInt& a)
+{
+	vector <int> res(this->number.size()*a.number.size(), 0);
+	for (int i = 0; i < this->number.size(); ++i)
+	{
+		int car = 0;
+		for (int j = 0; j < a.number.size(); ++j)
+		{
+			int temp = res[i + j] + this->number[i] * a.number[j] + car;
+			car = temp / 10;
+			res[i + j] = temp % 10;
+		}
+		int temp = a.number.size();
+		while (car)
+		{
+			res[i + temp] = car % 10;
+			temp++;
+			car /= 10;
+		}
+	}
+	while (res.size() > 1 && !res.back())
+	{
+		res.pop_back();
+	}
+	BigInt c(res);
+	if ((this->sign == 1 && a.sign == 0) || (this->sign == 0 && a.sign == 1))
+	{
+		c.setSign(1);
+	}
+	else
+	{
+		c.setSign(0);
+	}
+	return c;
 }
