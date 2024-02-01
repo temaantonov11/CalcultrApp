@@ -16,8 +16,8 @@ public:
 	BigInt(string& s);
 	BigInt(vector<int> numb);
 	void write() const;
-	BigInt pluss(BigInt& a);
-	BigInt minuss(BigInt& a);
+	BigInt pluss(BigInt& a)const;
+	BigInt minuss(BigInt& a)const;
 	bool operator > (BigInt& a);
 	bool operator = (BigInt& a);
 	void setSign(int sign);

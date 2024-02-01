@@ -33,8 +33,10 @@ int main()
         input = polish_natation(arr, size, st);
         stack second_stack(SIZE);
         string res = Math(input, second_stack);
-        cout << "The answer: " << res << endl;
-        cout << input;
+        if (res != "error")
+            cout << "The answer: " << res << endl;
+        else
+            cout << "Error!";
     }
     else {
         while (start < size) {

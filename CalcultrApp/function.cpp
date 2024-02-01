@@ -327,7 +327,14 @@ string Math(string& polish, stack& p_stack)
 					}
 					else if (polish[i] == '/')
 					{
-						p_stack.push(secondBigInt.operator/(firstBigInt).to_str());
+						if (firstBigInt.to_str()[0] == '0')
+						{
+							return "error";
+						}
+						else
+						{
+							p_stack.push(secondBigInt.operator/(firstBigInt).to_str());
+						}
 					}
 					
 				}
@@ -349,7 +356,12 @@ string Math(string& polish, stack& p_stack)
 					}
 					else if (polish[i] == '/')
 					{
-						p_stack.push(to_string(secondOperand / firstOperand));
+						if (to_string(firstOperand)[0] == '0')
+						{
+							return "error";
+						}
+						else
+							p_stack.push(to_string(secondOperand / firstOperand));
 					}
 					else if (polish[i] == '^')
 					{

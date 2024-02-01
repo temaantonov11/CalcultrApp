@@ -45,7 +45,7 @@ void BigInt::write() const
 	}
 }
 
-BigInt BigInt::pluss(BigInt& a)
+BigInt BigInt::pluss(BigInt& a)const
 {
 	int carry = 0;
 	vector <int> res;
@@ -82,7 +82,7 @@ BigInt BigInt::pluss(BigInt& a)
 	return c;
 }
 
-BigInt BigInt::minuss(BigInt& a)
+BigInt BigInt::minuss(BigInt& a)const
 {
 	vector <int> res;
 	int car = 0;
