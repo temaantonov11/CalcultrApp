@@ -10,7 +10,6 @@ using namespace std;
 
 int main()
 {
-    /*
     string input = "";
     stack st(SIZE);
     string arr[1000];
@@ -33,7 +32,7 @@ int main()
     if ((point = count_variable(arr, size, variable_arr)) == 0) {
         input = polish_natation(arr, size, st);
         stack second_stack(SIZE);
-        double res = Math(input, second_stack);
+        string res = Math(input, second_stack);
         cout << "The answer: " << res << endl;
         cout << input;
     }
@@ -43,11 +42,8 @@ int main()
         }
         cout << "Answer: " << reso[point1 - 1];
     }
+    
 
-    */
-    string s = "200";
-    BigInt a(s);
-    cout << '\n';
     /*try
     {
 

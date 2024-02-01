@@ -246,7 +246,7 @@ BigInt BigInt::operator-(BigInt& a)
 
 BigInt BigInt::operator*(BigInt& a)
 {
-	vector <int> res(this->number.size()*a.number.size(), 0);
+	vector <int> res(this->number.size()*a.number.size()+1, 0);
 	for (int i = 0; i < this->number.size(); ++i)
 	{
 		int car = 0;
