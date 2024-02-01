@@ -1,7 +1,9 @@
 ﻿#include "Stack.h"
 #include "function.h"
+#include "BigInt.h"
 #include <iostream>
 #include <string>
+#include <vector>
 
 enum { SIZE = 1000 };
 using namespace std;
@@ -32,8 +34,11 @@ int main()
     if ((point = count_variable(arr, size, variable_arr)) == 0) {
         input = polish_natation(arr, size, st);
         stack second_stack(SIZE);
-        double res = Math(input, second_stack);
-        cout << "The answer: " << res;
+        string res = Math(input, second_stack);
+        if (res != "error")
+            cout << "The answer: " << res << endl;
+        else
+            cout << "Error!";
     }
     else {
         while (start < size) {
@@ -42,6 +47,8 @@ int main()
         }
         cout << "Answer: " << reso[point1 - 1];
     }
+    
+
     /*try
     {
     }

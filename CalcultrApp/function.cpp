@@ -1,11 +1,14 @@
 #include "function.h"
 #include "Stack.h"
+#include "BigInt.h"
 #include <string>
 #include <iostream>
 #include <cmath>
 using namespace std;
 
-void solve_variable(string arr[], int& size, int& start, int& point, double* reso) {
+#define M_PI 3.14159265358979323846
+
+void solve_variable(string arr[], int& size, int& start, int& point, double *reso) {
 	string new_arr[1000];
 	int j = 0;
 	string save_name = "";
@@ -20,13 +23,13 @@ void solve_variable(string arr[], int& size, int& start, int& point, double* res
 	stack st(1000);
 	string input = polish_natation(new_arr, j, st);
 	stack second_stack(1000);
-	double res = Math(input, second_stack);
+	string res = Math(input, second_stack);
 	for (int i = start + 1; i < size; ++i) {
 		if (arr[i] == save_name) {
-			arr[i] = to_string(res);
+			arr[i] = res;
 		}
 	}
-	reso[point] = res;
+	reso[point] = stod(res);
 	++point;
 }
 int count_variable(string arr[], int& size, string* variable_arr) {
@@ -286,11 +289,14 @@ double BinaryPower(double b, unsigned long long e) {
 	return v;
 }
 
-double Math(string& polish, stack& p_stack)
+string Math(string& polish, stack& p_stack)
 {
 	string number;
 	string operatr;
 	double firstOperand, secondOperand;
+	BigInt firstBigInt();
+	BigInt secondBigInt();
+	int flag_BigInt = 0;
 	for (int i = 0; i < polish.size(); ++i)
 	{
 		if (polish[i] >= '0' && polish[i] <= '9' || polish[i] == '.')
@@ -313,32 +319,72 @@ double Math(string& polish, stack& p_stack)
 			}
 			if (p_stack.size() >= 2)
 			{
-				firstOperand = stod(p_stack.pop());
-				secondOperand = stod(p_stack.pop());
+				string pop1 = p_stack.pop();
+				string pop2 = p_stack.pop();
+				if (pop1.size() >= 10 || pop2.size() >= 10)
+				{
+					BigInt firstBigInt(pop1);
+					BigInt secondBigInt(pop2);
+					if (polish[i] == '+')
+					{
+						p_stack.push(secondBigInt.operator+(firstBigInt).to_str());
+					}
+					else if (polish[i] == '-')
+					{
+						p_stack.push(secondBigInt.operator-(firstBigInt).to_str());
+					}
+					else if (polish[i] == '*')
+					{
+						p_stack.push(secondBigInt.operator*(firstBigInt).to_str());
+					}
+					else if (polish[i] == '/')
+					{
+						if (firstBigInt.to_str()[0] == '0')
+						{
+							return "error";
+						}
+						else
+						{
+							p_stack.push(secondBigInt.operator/(firstBigInt).to_str());
+						}
+					}
+					
+				}
+				else
+				{
+					firstOperand = stod(pop1);
+					secondOperand = stod(pop2);
+					if (polish[i] == '+')
+					{
+						p_stack.push(to_string(firstOperand + secondOperand));
+					}
+					else if (polish[i] == '-')
+					{
+						p_stack.push(to_string(secondOperand - firstOperand));
+					}
+					else if (polish[i] == '*')
+					{
+						p_stack.push(to_string(secondOperand * firstOperand));
+					}
+					else if (polish[i] == '/')
+					{
+						if (to_string(firstOperand)[0] == '0')
+						{
+							return "error";
+						}
+						else
+							p_stack.push(to_string(secondOperand / firstOperand));
+					}
+					else if (polish[i] == '^')
+					{
+						p_stack.push(to_string(pow(secondOperand, firstOperand)));
+					}
+					
+				}
 			}
 			else
 			{
 				break;
-			}
-			if (polish[i] == '+')
-			{
-				p_stack.push(to_string(firstOperand + secondOperand));
-			}
-			else if (polish[i] == '-')
-			{
-				p_stack.push(to_string(secondOperand - firstOperand));
-			}
-			else if (polish[i] == '*')
-			{
-				p_stack.push(to_string(secondOperand * firstOperand));
-			}
-			else if (polish[i] == '/')
-			{
-				p_stack.push(to_string(secondOperand / firstOperand));
-			}
-			else if (polish[i] == '^')
-			{
-				p_stack.push(to_string(pow(secondOperand, firstOperand)));
 			}
 			
 		}
@@ -357,31 +403,31 @@ double Math(string& polish, stack& p_stack)
 				}
 				else if (operatr == "sin")
 				{
-					p_stack.push(to_string(sin(a)));
+					p_stack.push(to_string(sin(a * M_PI / 180)));
 				}
 				else if (operatr == "cos")
 				{
-					p_stack.push(to_string(cos(a)));
+					p_stack.push(to_string(cos(a*M_PI/180)));
 				}
 				else if (operatr == "tg")
 				{
-					p_stack.push(to_string(tan(a)));
+					p_stack.push(to_string(tan(a * M_PI / 180)));
 				}
 				else if (operatr == "ctg")
 				{
-					p_stack.push(to_string(cos(a) / sin(a)));
+					p_stack.push(to_string(cos(a * M_PI / 180) / sin(a * M_PI / 180)));
 				}
 				else if (operatr == "arcsin")
 				{
-					p_stack.push(to_string(asin(a)));
+					p_stack.push(to_string(asin(a * M_PI / 180)));
 				}
 				else if (operatr == "arccos")
 				{
-					p_stack.push(to_string(acos(a)));
+					p_stack.push(to_string(acos(a * M_PI / 180)));
 				}
 				else if (operatr == "arctg")
 				{
-					p_stack.push(to_string(atan(a)));
+					p_stack.push(to_string(atan(a * M_PI / 180)));
 				}
 				else if (operatr == "ln")
 				{
@@ -399,5 +445,5 @@ double Math(string& polish, stack& p_stack)
 			operatr.push_back(polish[i]);
 		}
 	}
-	return stod(p_stack.pop());
+	return p_stack.pop();
 }
