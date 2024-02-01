@@ -330,7 +330,7 @@ BigInt BigInt:: operator/(BigInt& a)
 	return c;
 }
 
-string BigInt::to_str()
+string BigInt::to_str()const
 {
 	string out;
 	if (this->sign == 1)

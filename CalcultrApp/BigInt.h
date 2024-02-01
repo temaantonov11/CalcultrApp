@@ -26,7 +26,7 @@ public:
 	BigInt operator * (BigInt& a);
 	bool operator <= (BigInt& a);
 	BigInt operator / (BigInt& a);
-	string to_str();
+	string to_str()const;
 private:
 	vector<int> number;
 	int sign;
